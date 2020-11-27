@@ -13,6 +13,7 @@ body {
 	line-height: 1.5;
 	box-sizing: border-box;
 	margin: 5px;
+	padding: 5px;
 }
 kbd {
 	background-color: #f1f1f1;
@@ -66,9 +67,13 @@ button {
 	padding: 0.5em 1em;
 	margin: 0.5rem;
 }
+button {
+	border: 1px solid transparent;
+}
 button:focus {
 	outline: transparent;
-	box-shadow: inset 0 0 0 0.25rem #999;
+	box-shadow: inset 0 0 0 0.25rem #eee;
+	border: 1px solid black;
 }
 #legend {
 	display: none;

@@ -13,9 +13,7 @@
 			a11y-annotation
 			<span aria-hidden="true">&gt;</span>
 		</h1>
-		<button id="start" type="button">
-			Start
-		</button>
+		<button id="start" type="button">Start</button>
 		<button id="legend" type="button" role="switch" aria-checked="false">
 			Legend<span aria-hidden="true"></span>
 		</button>
@@ -72,7 +70,12 @@
 		Annotations are in tab order but are always after all body content. You can
 		use <kbd>tab</kbd> and <kbd>shift<span aria-hidden="true">⇧</span></kbd> +
 		<kbd>tab</kbd> to move between them. The legend should always be the last
-		thing in tab order.
+		thing in tab order. While focused on an annotation, you can save using
+		<kbd>ctrl<span aria-hidden="true">⌃</span></kbd> +
+		<kbd>shift<span aria-hidden="true">⇧</span></kbd> + <kbd>s</kbd> and toggle
+		the legend with <kbd>ctrl<span aria-hidden="true">⌃</span></kbd> +
+		<kbd>shift<span aria-hidden="true">⇧</span></kbd> +
+		<kbd>l</kbd>
 
 		<h3>Annotations</h3>
 		<dl>
@@ -123,9 +126,7 @@
 				symbol will increment.
 			</dd>
 			<dt><kbd>delete</kbd></dt>
-			<dd>
-				Delete the annotation.
-			</dd>
+			<dd>Delete the annotation.</dd>
 		</dl>
 		<h3>Legend</h3>
 		Use <kbd>tab</kbd> to navigate within the Legend. All comments are editable.

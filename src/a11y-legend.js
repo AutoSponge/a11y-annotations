@@ -184,6 +184,23 @@
 			this.ownerDocument.removeEventListener('mouseup', endDrag, options);
 			this.ownerDocument.removeEventListener('mousemove', drag, options);
 		}
+		sendAction(keyboardEvent) {
+			if (!(keyboardEvent instanceof KeyboardEvent)) return;
+			const { key, shiftKey, ctrlKey } = keyboardEvent;
+			if (!ctrlKey || !shiftKey) return;
+			let action;
+			switch (key.toLowerCase()) {
+				case 's':
+					action = 'save';
+					break;
+				case 'l':
+					this.hidden = true;
+					break;
+				default:
+					return;
+			}
+			this.busChannel.postMessage({ action });
+		}
 		handleMessage({ data }) {
 			const {
 				text,
@@ -237,6 +254,7 @@
 			const endDrag = this.endDrag.bind(this);
 			const changeMode = this.changeMode.bind(this);
 			const handleMessage = this.handleMessage.bind(this);
+			const sendAction = this.sendAction.bind(this);
 			this.listeners = {
 				options,
 				changeMode,
@@ -245,6 +263,7 @@
 				drag,
 				endDrag,
 				handleMessage,
+				sendAction,
 			};
 			this.addEventListener('mousedown', startDrag, options);
 			this.addEventListener('mouseenter', changeMode, options);
@@ -256,10 +275,13 @@
 			this.addEventListener('keydown', changeMode, options);
 			this.addEventListener('keyup', changeMode, options);
 			this.addEventListener('keydown', updateContent, options);
+			this.addEventListener('keyup', sendAction, options);
 
 			// handle communications from a11y-annotations
 			this.channel = new BroadcastChannel('a11y-annotation');
 			this.channel.onmessage = handleMessage;
+			// communicate with content script
+			this.busChannel = new BroadcastChannel('a11y-annotations-bus');
 		}
 	}
 	if (!customElements.get('a11y-legend')) {

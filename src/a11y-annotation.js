@@ -453,6 +453,23 @@
 			const isVisible = intersectionRatio === 1;
 			this.sendMessage({ isVisible });
 		}
+		sendAction(keyboardEvent) {
+			if (!(keyboardEvent instanceof KeyboardEvent)) return;
+			const { key, shiftKey, ctrlKey } = keyboardEvent;
+			if (!ctrlKey || !shiftKey) return;
+			let action;
+			switch (key.toLowerCase()) {
+				case 's':
+					action = 'save';
+					break;
+				case 'l':
+					action = 'legend';
+					break;
+				default:
+					return;
+			}
+			this.busChannel.postMessage({ action });
+		}
 		createObserver() {
 			const options = {
 				root: null,
@@ -483,6 +500,7 @@
 			const drag = this.drag.bind(this);
 			const endDrag = this.endDrag.bind(this);
 			const isVisible = this.isVisible.bind(this);
+			const sendAction = this.sendAction.bind(this);
 			this.listeners = {
 				options,
 				changeMode,
@@ -491,6 +509,7 @@
 				drag,
 				endDrag,
 				isVisible,
+				sendAction,
 			};
 			this.addEventListener('mousedown', changeMode, options);
 			this.addEventListener('mousedown', startDrag, options);
@@ -502,8 +521,11 @@
 			this.addEventListener('touchcancel', endDrag, options);
 			this.addEventListener('keydown', changeMode, options);
 			this.addEventListener('keydown', updateContent, options);
+			this.addEventListener('keyup', sendAction, options);
 
 			this.channel = new BroadcastChannel('a11y-annotation');
+			// communicate with content script
+			this.busChannel = new BroadcastChannel('a11y-annotations-bus');
 			this.createObserver();
 			this.setLabel({ isVisible: true });
 		}
