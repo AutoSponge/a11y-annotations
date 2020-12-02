@@ -22,3 +22,4 @@ Adds a web component to the page that aids in accessibility blueline style annot
 - [ ] Add "box" and "arrow" shape transformations
 - [ ] Make saved state export to file option
 - [ ] Toggle "autosave" feature
+- [ ] Consider "binding" shapes to specific DOM elements
