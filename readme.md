@@ -15,3 +15,8 @@ Adds a web component to the page that aids in accessibility blueline style annot
 1. Refresh the page or open a new tab (on first load only).
 1. Click the "A11y Annotations" icon.
 1. Click "Start" (follow other directions).
+
+## TODO
+
+- [ ] Fix drag-and-drop handlers for "fast dragging"
+- [ ] Add "box" and "arrow" shape transformations
