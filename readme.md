@@ -20,3 +20,5 @@ Adds a web component to the page that aids in accessibility blueline style annot
 
 - [ ] Fix drag-and-drop handlers for "fast dragging"
 - [ ] Add "box" and "arrow" shape transformations
+- [ ] Make saved state export to file option
+- [ ] Toggle "autosave" feature
